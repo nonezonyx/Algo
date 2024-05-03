@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# build directory
+build/
+
+# CMake files
+CMakeFiles/
+
+# CMake cache
+CMakeCache.txt
+
+# tasks from contest
+contest/

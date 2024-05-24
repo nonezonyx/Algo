@@ -15,23 +15,8 @@ cmake ..
 # Compile the program
 make $1
 
-# Clear *_res.cpp file
-echo "" > "../contest/$1/${1}_res.cpp"
-
 # Create *_res.cpp file with all custom includes
-grep -r -h '#include "' ../contest/$1/$1.cpp | grep -v '<' | cut -d'"' -f2 | while read line
-do
-    cat "../templates/$line" >> "../contest/$1/${1}_res.cpp"
-done
-
-# Append the original C++ code to *_res.cpp
-cat "../contest/$1/$1.cpp" >> "../contest/$1/${1}_res.cpp"
-
-# Replace includes from templates with the actual content of the files
-sed -i '/#include "/{s/^.*"//;s/".*$//;r ../templates/'"../contest/$1/${1}_res.cpp" -e 'd}' "../contest/$1/${1}_res.cpp"
-
-# Remove original includes from templates
-sed -i '/#include "/d' "../contest/$1/${1}_res.cpp"
+cpp-merge -o "../contest/$1/${1}_res.cpp" -i ../templates/  "../contest/$1/$1.cpp"
 
 # Run the program with input.txt and redirect the output to out.txt
 i=1

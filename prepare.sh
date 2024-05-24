@@ -19,6 +19,7 @@ do
 
     # Create the C++ file
     touch "$cpp_file"
+    cat template.cpp > $cpp_file
 
     # Create the tests folder
     mkdir -p "$tests_folder"
